@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprovativo de Alojamento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h2>إثبات السكن لمصلحة الهجرة والحدود البرتغالية (SEF)</h2>
+
+<table>
+    <tr>
+        <th>المستند</th>
+        <th>الوصف</th>
+    </tr>
+    <tr>
+        <td>عقد الإيجار</td>
+        <td>عقد إيجار موقع من المالك يتضمن اسمك، عنوان العقار، مدة الإيجار، وقيمة الإيجار.</td>
+    </tr>
+    <tr>
+        <td>حجز فندق</td>
+        <td>تأكيد حجز من فندق أو مؤسسة إقامة مشابهة للفترة التي ستقيم فيها.</td>
+    </tr>
+    <tr>
+        <td>خطاب دعوة</td>
+        <td>إذا كنت تقيم مع صديق أو أحد أفراد العائلة، يمكنك تقديم خطاب دعوة منهم. يجب أن يتضمن هذا الخطاب اسمهم الكامل، عنوانهم، رقم هويتهم، وبيان يؤكد أنك ستقيم معهم. يجب أن يكون الخطاب موقعًا ومرفقًا بنسخة من هويتهم أو بطاقة إقامتهم.</td>
+    </tr>
+    <tr>
+        <td>صك الملكية</td>
+        <td>إذا كنت تمتلك عقارًا في البرتغال، يمكنك تقديم نسخة من صك الملكية أو وثيقة تسجيل العقار.</td>
+    </tr>
+    <tr>
+        <td>إعلان السكن</td>
+        <td>قد توفر بعض الجامعات أو أصحاب العمل إعلانًا يؤكد ترتيبات إقامتك.</td>
+    </tr>
+</table>
+
+<button onclick="copyContent()">نسخ المحتوى</button>
+<button onclick="window.print()">طباعة</button>
+
+<script>
+    function copyContent() {
+        let table = document.querySelector('table').outerHTML;
+        let tempTextArea = document.createElement('textarea');
+        tempTextArea.value = table;
+        document.body.appendChild(tempTextArea);
+        tempTextArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempTextArea);
+        alert('تم نسخ المحتوى');
+    }
+</script>
+
+</body>
+</html>
