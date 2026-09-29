@@ -1,84 +1,434 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comprovativo de Alojamento</title>
+    <title>تعلم مصطلحات بلدية هاريلبيك - Harelbeke Terms</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+        :root {
+            --primary: #2c3e50;
+            --accent: #2980b9;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-dark: #2c3e50;
+            --text-arabic: #27ae60;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary);
             margin-bottom: 20px;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+
+        .controls {
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 25px;
         }
-        th {
-            background-color: #f2f2f2;
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
         }
-        button {
-            margin: 5px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
+
+        .btn {
+            background-color: var(--accent);
             color: white;
             border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
             cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.2s;
         }
-        button:hover {
-            background-color: #45a049;
+
+        .btn:hover {
+            background-color: #1c5980;
+        }
+
+        .section-title {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-size: 1.3rem;
+        }
+
+        .category-title {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 5px;
+            margin-top: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-left: 5px solid var(--accent);
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .dutch-text {
+            font-weight: bold;
+            font-size: 1.05rem;
+            color: #333;
+            margin-bottom: 8px;
+            direction: ltr;
+        }
+
+        .arabic-text {
+            color: var(--text-arabic);
+            font-size: 1.05rem;
+            direction: rtl;
+            text-align: right;
+            font-family: 'Tahoma', sans-serif;
+            transition: opacity 0.3s;
+        }
+
+        .hidden {
+            opacity: 0;
+            user-select: none;
+        }
+
+        .note-card {
+            background: #fff8e1;
+            border-left-color: #f39c12;
         }
     </style>
 </head>
 <body>
 
-<h2>إثبات السكن لمصلحة الهجرة والحدود البرتغالية (SEF)</h2>
+<div class="container">
+    <h1>دليل مصطلحات الخدمات الحكومية (Harelbeke)</h1>
 
-<table>
-    <tr>
-        <th>المستند</th>
-        <th>الوصف</th>
-    </tr>
-    <tr>
-        <td>عقد الإيجار</td>
-        <td>عقد إيجار موقع من المالك يتضمن اسمك، عنوان العقار، مدة الإيجار، وقيمة الإيجار.</td>
-    </tr>
-    <tr>
-        <td>حجز فندق</td>
-        <td>تأكيد حجز من فندق أو مؤسسة إقامة مشابهة للفترة التي ستقيم فيها.</td>
-    </tr>
-    <tr>
-        <td>خطاب دعوة</td>
-        <td>إذا كنت تقيم مع صديق أو أحد أفراد العائلة، يمكنك تقديم خطاب دعوة منهم. يجب أن يتضمن هذا الخطاب اسمهم الكامل، عنوانهم، رقم هويتهم، وبيان يؤكد أنك ستقيم معهم. يجب أن يكون الخطاب موقعًا ومرفقًا بنسخة من هويتهم أو بطاقة إقامتهم.</td>
-    </tr>
-    <tr>
-        <td>صك الملكية</td>
-        <td>إذا كنت تمتلك عقارًا في البرتغال، يمكنك تقديم نسخة من صك الملكية أو وثيقة تسجيل العقار.</td>
-    </tr>
-    <tr>
-        <td>إعلان السكن</td>
-        <td>قد توفر بعض الجامعات أو أصحاب العمل إعلانًا يؤكد ترتيبات إقامتك.</td>
-    </tr>
-</table>
+    <div class="controls">
+        <input type="text" id="searchInput" class="search-box" placeholder="ابحث بالهولندية أو العربية / Zoek in het Nederlands of Arabisch...">
+        <button class="btn" onclick="toggleTranslations()">إخفاء / إظهار الترجمة</button>
+    </div>
 
-<button onclick="copyContent()">نسخ المحتوى</button>
-<button onclick="window.print()">طباعة</button>
+    <div id="contentContainer"></div>
+</div>
 
 <script>
-    function copyContent() {
-        let table = document.querySelector('table').outerHTML;
-        let tempTextArea = document.createElement('textarea');
-        tempTextArea.value = table;
-        document.body.appendChild(tempTextArea);
-        tempTextArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(tempTextArea);
-        alert('تم نسخ المحتوى');
+const data = [
+    {
+        section: "VREEMDELINGENZAKEN (شؤون الأجانب والحديثي العهد)",
+        categories: [
+            {
+                name: "Vaak gevraagde producten (الخدمات الأكثر طلباً)",
+                items: [
+                    { nl: "Belgische nationaliteit aanvragen", ar: "طلب الحصول على الجنسية البلجيكية" },
+                    { nl: "Elektronische verblijfskaart aanvragen", ar: "طلب بطاقة إقامة إلكترونية" },
+                    { nl: "Nieuwkomer in België - opstart dossier", ar: "القادمون الجدد إلى بلجيكا - فتح ملف" },
+                    { nl: "Opvolging dossier", ar: "متابعة الملف" }
+                ]
+            },
+            {
+                name: "Alle producten (جميع الخدمات)",
+                items: [
+                    { nl: "Aanvraag duurzaam verblijf - F+, E+, C of D kaart", ar: "طلب الإقامة الدائمة - بطاقة F+، E+، C أو D" },
+                    { nl: "Belgische nationaliteit aanvragen", ar: "طلب الحصول على الجنسية البلجيكية" },
+                    { nl: "Buitenlandse aktes afhalen", ar: "استلام العقود/الوثائق الأجنبية" },
+                    { nl: "Elektronische verblijfskaart aanvragen", ar: "طلب بطاقة إقامة إلكترونية" },
+                    { nl: "Elektronische verblijfskaart afhalen", ar: "استلام بطاقة الإقامة الإلكترونية" },
+                    { nl: "Huwelijk met een niet-Belg", ar: "الزواج من شخص غير بلجيكي" },
+                    { nl: "Kort verblijf Europeanen - 3 ter", ar: "الإقامة القصيرة للأوروبيين - ملحق 3 ter" },
+                    { nl: "Kort verblijf niet - Europeanen - aankomstverklaring", ar: "الإقامة القصيرة لغير الأوروبيين - تصريح الوصول" },
+                    { nl: "Nieuwkomer in België - opstart dossier", ar: "القادمون الجدد إلى بلجيكا - فتح ملف" },
+                    { nl: "Omwisseling buitenlands rijbewijs", ar: "استبدال رخصة قيادة أجنبية" },
+                    { nl: "Opvolging dossier", ar: "متابعة الملف" },
+                    { nl: "Reispas voor vluchtelingen aanvragen", ar: "طلب جواز سفر للاجئين (جواز سفر أزرق)" },
+                    { nl: "Reispas voor vluchtelingen afhalen", ar: "استلام جواز سفر للاجئين" },
+                    { nl: "Tenlasteneming / uitnodiging (3 bis)", ar: "التكفل المالي / الدعوة (ملحق 3 bis)" },
+                    { nl: "Verblijfsdocument - Attest van immatriculatie", ar: "وثيقة إقامة - شهادة التسجيل المؤقتة (البرتقالية)" },
+                    { nl: "Verblijfsdocument - Bijlage 35", ar: "وثيقة إقامة - الملحق 35" },
+                    { nl: "Verblijfsdocument - Kinderpasje -12 voor niet-Belgen", ar: "وثيقة إقامة - بطاقة أطفال أقل من 12 سنة لغير البلجيكيين" },
+                    { nl: "Wettelijk samenwonen met iemand zonder wettig verblijf", ar: "المساكنة القانونية مع شخص لا يملك إقامة قانونية" }
+                ]
+            }
+        ]
+    },
+    {
+        section: "BEVOLKING (السكان والشؤون المدنية)",
+        categories: [
+            {
+                name: "Vaak gevraagde producten (الخدمات الأكثر طلباً)",
+                items: [
+                    { nl: "Rijbewijs aanvragen of vernieuwen", ar: "طلب أو تجديد رخصة القيادة" },
+                    { nl: "eID aanvragen", ar: "طلب بطاقة الهوية الإلكترونية" },
+                    { nl: "Adreswijziging aangifte", ar: "الإبلاغ عن تغيير العنوان" }
+                ]
+            },
+            {
+                name: "Alle producten (جميع الخدمات)",
+                items: [
+                    { nl: "Adreswijziging - na bezoek wijkagent", ar: "تغيير العنوان - بعد زيارة شرطي المنطقة" },
+                    { nl: "Adreswijziging aangifte", ar: "الإبلاغ عن تغيير العنوان" },
+                    { nl: "Attest van gezinssamenstelling", ar: "شهادة التركيبة العائلية (التركيبة الأسريّة)" },
+                    { nl: "Attest van leven", ar: "شهادة على قيد الحياة" },
+                    { nl: "Attest van nationaliteit", ar: "شهادة الجنسية" },
+                    { nl: "Attest van ongehuwde staat", ar: "شهادة العزوبية / عدم الزواج" },
+                    { nl: "Attest van woonst", ar: "شهادة السكن / الإقامة" },
+                    { nl: "Document voor eensluidend verklaren", ar: "تصديق مطابقة المستندات للأصل" },
+                    { nl: "eID aanvragen", ar: "طلب بطاقة الهوية الإلكترونية" },
+                    { nl: "eID afhalen", ar: "استلام بطاقة الهوية الإلكترونية" },
+                    { nl: "eID PIN- en PUK-codes", ar: "رموز PIN و PUK لبطاقة الهوية" },
+                    { nl: "eID certificaten vernieuwen", ar: "تجديد شهادات بطاقة الهوية الرقمية" },
+                    { nl: "Frans/Duits/Nederlands pensioen", ar: "معاملات المعاش التقاعدي الفرنسي/الألماني/الهولندي" },
+                    { nl: "Internationaal rijbewijs", ar: "رخصة قيادة دولية" },
+                    { nl: "Kids-ID aanvragen", ar: "طلب بطاقة هوية للأطفال" },
+                    { nl: "Kids-ID afhalen", ar: "استلام بطاقة هوية للأطفال" },
+                    { nl: "Reispas aanvragen", ar: "طلب جواز سفر" },
+                    { nl: "Reispas afhalen", ar: "استلام جواز سفر" },
+                    { nl: "Reistoelating minderjarige aanvragen", ar: "طلب تصريح سفر للقاصرين" },
+                    { nl: "Voorlopig rijbewijs aanvragen", ar: "طلب رخصة قيادة مؤقتة" },
+                    { nl: "Rijbewijs aanvragen of vernieuwen", ar: "طلب أو تجديد رخصة القيادة" },
+                    { nl: "Rijbewijs afhalen", ar: "استلام رخصة القيادة" },
+                    { nl: "RVA-documenten invullen en ondertekenen", ar: "تعبئة وتوقيع وثائق مكتب العمل (RVA)" },
+                    { nl: "Token aanvragen", ar: "طلب رمز الدخول الرقمي (Token)" },
+                    { nl: "Trein- en busabonnement - tussenkomst", ar: "دعم/تخفيض اشتراك القطار والحافلة" },
+                    { nl: "Uittreksel strafregister", ar: "مستخرج السجل العدلي (لا حكم عليه)" },
+                    { nl: "Verhuis naar buitenland", ar: "الإبلاغ عن الانتقال للعيش خارج البلاد" },
+                    { nl: "Verkiezingen - duplicaat oproepingsbrief", ar: "الانتخابات - بدل فاقد لبطاقة الدعوة للانتخاب" },
+                    { nl: "Verkiezingen - info", ar: "الانتخابات - معلومات" },
+                    { nl: "Verkiezingen - volmacht", ar: "الانتخابات - توكيل شخص آخر للتصويت" },
+                    { nl: "Verlies/diefstal identiteitsdocumenten (eID, reispas, rijbewijs,...)", ar: "فقدان أو سرقة وثائق الهوية (الهوية، جواز السفر، رخصة القيادة...)" },
+                    { nl: "Vrijstelling veiligheidsgordel", ar: "الإعفاء من ارتداء حزام الأمان" },
+                    { nl: "Wettigen handtekening", ar: "التصديق على التوقيع (صحة التوقيع)" }
+                ]
+            }
+        ]
+    },
+    {
+        section: "BURGERLIJKE STAND (الأحوال المدنية)",
+        categories: [
+            {
+                name: "Vaak gevraagde producten (الخدمات الأكثر طلباً)",
+                items: [
+                    { nl: "Erkenning van een kind", ar: "الإقرار بنسب/الاعتراف بطفل" },
+                    { nl: "Euthanasie", ar: "التصريح بالقتل الرحيم (الموت الرحيم)" },
+                    { nl: "Wettelijk samenwonen", ar: "عقد المساكنة القانونية" }
+                ]
+            },
+            {
+                name: "Alle producten (جميع الخدمات)",
+                items: [
+                    { nl: "Afschrift echtscheidingsakte", ar: "نسخة من عقد الطلاق" },
+                    { nl: "Afschrift geboorteakte", ar: "نسخة من شهادة الميلاد" },
+                    { nl: "Afschrift huwelijksakte", ar: "نسخة من عقد الزواج" },
+                    { nl: "Afschrift overlijdensakte", ar: "نسخة من شهادة الوفاة" },
+                    { nl: "Begraafplaatsen - concessie", ar: "المقابر - امتياز شراء قطعة في المقبرة" },
+                    { nl: "Begraafplaatsen - naamplaatje strooiweide", ar: "المقابر - اللوحة الاسمية لساحة نثر الرماد" },
+                    { nl: "Begraafplaatsen - ontgraving", ar: "المقابر - استخراج الجثامين" },
+                    { nl: "Erkenning van een kind", ar: "الإقرار بنسب/الاعتراف بطفل" },
+                    { nl: "Euthanasie", ar: "التصريح بالقتل الرحيم" },
+                    { nl: "Geboorte - aangifte van geboorte in Harelbeke", ar: "المواليد - تسجيل مولود جديد في هاريلبيك" },
+                    { nl: "Huwelijk", ar: "عقد الزواج" },
+                    { nl: "Jubileum", ar: "الاحتفال بالذكرى السنوية (للزواج مثلاً)" },
+                    { nl: "Laatste wil", ar: "الوصية الأخيرة (تعليمات الجنازة)" },
+                    { nl: "Orgaandonatie", ar: "التبرع بالأعضاء" },
+                    { nl: "Overlijden - aangifte", ar: "الوفيات - الإبلاغ عن حالة وفاة" },
+                    { nl: "Polio inenting", ar: "تطعيم شلل الأطفال (الإجباري)" },
+                    { nl: "Wettelijk samenwonen", ar: "عقد المساكنة القانونية" },
+                    { nl: "Wettelijk samenwonen beëindigen", ar: "إنهاء عقد المساكنة القانونية" },
+                    { nl: "Wijzigen voor- en familienaam", ar: "تغيير الاسم الأول واللقب العائلي" },
+                    { nl: "   Voornaamswijziging", ar: "   تغيير الاسم الأول" },
+                    { nl: "   Familienaam wijzigen", ar: "   تغيير اسم العائلة (اللقب)" }
+                ]
+            }
+        ]
+    },
+    {
+        section: "RUIMTE: OMGEVING EN WONEN - PATRIMONIUM - ECONOMIE (التخطيط: البيئة والسكن - الأملاك - الاقتصاد)",
+        categories: [
+            {
+                name: "PATRIMONIUM (أملاك البلدية والشوارع)",
+                items: [
+                    { nl: "Inname openbaar domein (container, verhuiswagen, stelling, kraan)", ar: "استغلال الممتلكات العامة (وضع حاوية، شاحنة نقل، سقالة، رافعة)" }
+                ]
+            },
+            {
+                name: "ECONOMIE (الاقتصاد والأعمال)",
+                items: [
+                    { nl: "Ambulante handel (buiten de wekelijkse markt) - aanvraag standplaats", ar: "التجارة المتجولة (خارج السوق الأسبوعي) - طلب موقع" },
+                    { nl: "Bestuurderspas aanvragen", ar: "طلب تصريح سائق (للسائقين المهنيين)" },
+                    { nl: "Horecavergunning aanvragen", ar: "طلب ترخيص مطعم/مقهى (Horeca)" },
+                    { nl: "Individueel bezoldigd personenvervoer - vergunning aanvragen", ar: "النقل الفردي المأجور للأشخاص (تاكسي) - طلب ترخيص" },
+                    { nl: "Seizoensgebonden terras aanvragen", ar: "طلب ترخيص جلسة خارجية (تراس) موسمي" }
+                ]
+            },
+            {
+                name: "OMGEVING (البيئة والعمران)",
+                items: [
+                    { nl: "Begin en einde der werken indienen", ar: "تقديم إشعار ببدء وانتهاء الأشغال" },
+                    { nl: "Bodemverontreiniging, -sanering en -attesten", ar: "تلوث التربة، التنظيف/المعالجة وشواهد التربة" },
+                    { nl: "Huisnummer aanvragen", ar: "طلب تخصيص رقم منزل" },
+                    { nl: "Individuele behandelingsinstallatie voor afvalwater (IBA)", ar: "محطة معالجة مياه الصرف الصحي الفردية" },
+                    { nl: "Omgeving - klachten", ar: "البيئة - الشكاوى" },
+                    { nl: "Omgevingsvergunning- bespreking milieugerelateerde handelingen", ar: "تصريح البيئة - مناقشة الأنشطة المتعلقة بالبيئة" },
+                    { nl: "Omgevingsvergunning stedenbouw - indienen", ar: "تصريح البيئة والبناء - تقديم الطلب" },
+                    { nl: "Omgevingsvergunning - Indienen bezwaren", ar: "تصريح البيئة - تقديم الاعتراضات" },
+                    { nl: "Ontwerp verkaveling bespreken", ar: "مناقشة مشروع تقسيم الأراضي (المخطط العمراني)" },
+                    { nl: "Openbaar onderzoek omgevingsvergunning - inzage", ar: "التحقيق العام لرخص البيئة - الاطلاع على الملفات" },
+                    { nl: "Opritten verlagen boordsteen (particulier) of doortrekken oprit op openbaar domein", ar: "خفض حافة الرصيف لمدخل السيارة أو تمديد المدخل على الملك العام" },
+                    { nl: "RUP - Openbaar onderzoek", ar: "خطة التنفيذ المكانية (RUP) - التحقيق العام" },
+                    { nl: "Stedenbouwkundig attest indienen", ar: "تقديم طلب الشهادة التخطيطية/العمرانية" },
+                    { nl: "Stedenbouwkundige info (bouw- en verbouwmogelijkheden)", ar: "معلومات التخطيط العمراني (إمكانيات البناء والتجديد)" },
+                    { nl: "Vergunning - verklaring aanplakking", ar: "الترخيص - إعلان تعليق/إشهار الرخصة" },
+                    { nl: "Verwijderen van groen (grasstrook, boom,...) op het openbaar domein", ar: "إزالة المساحات الخضراء (شريط عشبي، شجرة...) في الملك العام" },
+                    { nl: "Wonen - Conformiteitsattest", ar: "السكن - شهادة المطابقة والجودة للسكن" },
+                    { nl: "Wonen - Huren en verhuren", ar: "السكن - الاستئجار والتأجير" },
+                    { nl: "Wonen - info over mogelijke premies", ar: "السكن - معلومات عن الإعانات/المنح المتاحة" },
+                    { nl: "Wonen - Hulp bij voorbereiden premie-aanvraag", ar: "السكن - المساعدة في إعداد طلب المنحة" },
+                    { nl: "Wonen - Kwaliteitslabel", ar: "السكن - علامة جودة السكن" },
+                    { nl: "Wonen - Leegstand bedrijven / verwaarloosde bedrijven", ar: "السكن - الشركات الشاغرة / الشركات المهملة" },
+                    { nl: "Wonen - Leegstand woningen; gebouwen kleiner dan 500m²", ar: "السكن - المنازل الشاغرة؛ المباني الأصغر من 500 متر مربع" },
+                    { nl: "Wonen - Leegstand: vermoeden, akte, heffing en vrijstelling", ar: "السكن - الشغور: الشك، التوثيق، الضريبة والإعفاء" },
+                    { nl: "Wonen - Mijn VerbouwLening - intakegesprek", ar: "السكن - قرض التجديد (Mijn VerbouwLening) - مقابلة أولية" },
+                    { nl: "Wonen - Mijn VerbouwLening - Bestaand Dossier", ar: "السكن - قرض التجديد - ملف حالي/قائم" },
+                    { nl: "Wonen - Tweede verblijven", ar: "السكن - المساكن الثانوية (منازل العطلات)" },
+                    { nl: "Wonen - Verwaarlozing", ar: "السكن - الإهمال للمباني" },
+                    { nl: "Wonen - Woningkwaliteit - vraag/klacht/ongeschikt/onbewoonbaar", ar: "السكن - جودة المنزل - سؤال/شكوى/غير مناسب/غير صالح للسكن" }
+                ]
+            },
+            {
+                name: "GROEN EN NATUUR (المساحات الخضراء والطبيعة)",
+                items: [
+                    { nl: "Groen en natuur - subsidies", ar: "المساحات الخضراء والطبيعة - الإعانات والمنح المالية" }
+                ]
+            }
+        ]
+    },
+    {
+        section: "Zonder afspraak (بدون موعد مسبق - معلومات هامة)",
+        categories: [
+            {
+                name: "Informatie en Regels (الملاحظات والتعليمات)",
+                items: [
+                    { 
+                        nl: "Je moet geen afspraak maken voor het kopen van een UiTPAS, Oarelbeke Weireldkoarten of retributiestickers voor op huisvuilzakken.", 
+                        ar: "لا داعي لحجز موعد لشراء بطاقة الأنشطة (UiTPAS)، بطاقات هاريلبيك، أو ملصقات الرسوم لأكياس القمامة." 
+                    },
+                    { 
+                        nl: "Huisvuilzakken zelf zijn niet meer te koop in het stadhuis.", 
+                        ar: "أكياس القمامة المنزلية نفسها لم تعد تُباع في مبنى البلدية (الستادهويس)." 
+                    },
+                    { 
+                        nl: "Ook voor het aanvragen van een bewonerskaart kan je zonder afspraak langskomen.", 
+                        ar: "يمكنك أيضاً الحضور بدون موعد لطلب الحصول على بطاقة السكان (للركن/التوقف)." 
+                    },
+                    { 
+                        nl: "Om een UiTPAS aan te kopen aan kansentarief kan je terecht in het Huis van Welzijn.", 
+                        ar: "لشراء بطاقة UiTPAS بسعر مخفض (Kansentarief)، يمكنك التوجه إلى 'بيت رفاهية المجتمع' (Huis van Welzijn)." 
+                    },
+                    { 
+                        nl: "Een bewijs van een polio-inenting mag je zonder afspraak komen binnenbrengen op het stadhuis of buiten de openingstijden in de brievenbus deponeren.", 
+                        ar: "يمكنك تسليم إثبات التطعيم ضد شلل الأطفال بدون موعد في البلدية، أو وضعه في صندوق البريد خارج أوقات العمل." 
+                    }
+                ]
+            }
+        ]
     }
+];
+
+function renderContent() {
+    const container = document.getElementById('contentContainer');
+    container.innerHTML = '';
+
+    data.forEach(sec => {
+        const secTitle = document.createElement('div');
+        secTitle.className = 'section-title';
+        secTitle.innerText = sec.section;
+        container.appendChild(secTitle);
+
+        sec.categories.forEach(cat => {
+            const catTitle = document.createElement('h3');
+            catTitle.className = 'category-title';
+            catTitle.innerText = cat.name;
+            container.appendChild(catTitle);
+
+            const grid = document.createElement('div');
+            grid.className = 'grid';
+
+            cat.items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card' + (sec.section.includes("Zonder afspraak") ? ' note-card' : '');
+
+                card.innerHTML = `
+                    <div class="dutch-text">${item.nl}</div>
+                    <div class="arabic-text">${item.ar}</div>
+                `;
+                grid.appendChild(card);
+            });
+
+            container.appendChild(grid);
+        });
+    });
+}
+
+function toggleTranslations() {
+    const arabicTexts = document.querySelectorAll('.arabic-text');
+    arabicTexts.forEach(el => {
+        el.classList.toggle('hidden');
+    });
+}
+
+document.getElementById('searchInput').addEventListener('input', function(e) {
+    const term = e.target.value.toLowerCase();
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+        const dutch = card.querySelector('.dutch-text').innerText.toLowerCase();
+        const arabic = card.querySelector('.arabic-text').innerText.toLowerCase();
+
+        if (dutch.includes(term) || arabic.includes(term)) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+});
+
+renderContent();
 </script>
 
 </body>
