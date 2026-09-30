@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- العنوان المضاف لتنسيق شريط المتصفح -->
+    <title>Samer Alsaadni | Motivation Letters - خطابات الدافع</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-hover: #1d4ed8;
+            --bg-body: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border: #e2e8f0;
+            --accent: #2563eb;
+            --success: #16a34a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .profile-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .avatar-initials {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            color: #93c5fd;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            font-size: 0.95rem;
+            color: #e2e8f0;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-info a:hover {
+            color: #93c5fd;
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 40px auto 0;
+            padding: 0 20px;
+        }
+
+        .letter-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .letter-card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--bg-body);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .lang-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .badge {
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .btn-copy {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-copy:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .letter-content {
+            white-space: pre-line;
+            color: var(--text-main);
+            font-size: 0.98rem;
+            line-height: 1.7;
+        }
+
+        [dir="rtl"] {
+            font-family: 'Cairo', 'Inter', system-ui, sans-serif;
+            text-align: right;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #0f172a;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.7rem; }
+            .card-header { flex-direction: column; align-items: flex-start; }
+            .btn-copy { width: 100%; justify-content: center; margin-top: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="profile-title">
+                <div class="avatar-initials">SA</div>
+                <div>
+                    <h1>Samer Alsaadni</h1>
+                    <p>Senior Mechanical Engineer / Multi-Skilled Professional</p>
+                </div>
+            </div>
+            
+            <div class="contact-info">
+                <span><i class="fa-solid fa-location-dot"></i> Harelbeke, Belgium</span>
+                <span>•</span>
+                <a href="tel:+32498164320"><i class="fa-solid fa-phone"></i> +32 498 164 320</a>
+                <span>•</span>
+                <a href="mailto:samerguda@gmail.com"><i class="fa-solid fa-envelope"></i> samerguda@gmail.com</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        
+        <!-- Dutch Section -->
+        <section class="letter-card">
+            <div class="card-header">
+                <div class="lang-title">
+                    <i class="fa-solid fa-globe"></i> Open Sollicitatiebrief (Nederlands - A2)
+                    <span class="badge">Dutch A2 Ready</span>
+                </div>
+                <button class="btn-copy" onclick="copyText('dutch-text')">
+                    <i class="fa-regular fa-copy"></i> Copy Letter
+                </button>
+            </div>
+            
+            <div id="dutch-text" class="letter-content" dir="ltr">Samer Alsaadni
+Harelbeke, België
+Telefoon: +32 498 164 320
+E-mail: samerguda@gmail.com
+
+Onderwerp: Open Sollicitatie / Motivatiebrief
+
+Geachte heer, mevrouw,
+
+Met deze brief wil ik mijn sterke interesse tonen om uw team te komen versterken. Ik woon in Harelbeke (België) en heb meer dan 15 jaar professionele ervaring. Mijn achtergrond omvat technische werking, projectmanagement, teamcoördinatie en toezicht op de werkplek. Ik ben zeer flexibel, leer snel en sta volledig open voor verschillende operationele, technische of administratieve functies binnen uw bedrijf.
+
+In mijn carrière heb ik succesvol complexe taken beheerd, teams geleid, samengewerkt met verschillende partijen en gezorgd voor kwaliteit en veiligheid. Ik heb een bachelordiploma, een postgraduaat in management en ik volg momenteel een aanvullende masteropleiding in management. Deze combinatie van technische kennis en managementvaardigheden zorgt ervoor dat ik mij snel kan aanpassen aan nieuwe werkomgevingen.
+
+Mijn belangrijkste sterke punten:
+- Sterke organisatie en coördinatie: Ervaring met het beheren van dagelijkse werkzaamheden, het plannen van taken en het oplossen van praktische problemen.
+- Technische vaardigheden: Ervaring met moderne technische hulpmiddelen, software en digitaal werk.
+- Betrouwbaarheid en talenkennis: Vloeiend in het Engels, moedertaal Arabisch, en ik heb niveau A2 in het Nederlands, dat ik actief blijf verbeteren om vlot te communiceren met collega's op de werkvloer.
+
+Ik ben een gemotiveerde en hardwerkende professional die direct waarde wil toevoegen aan uw organisatie. Ik ben beschikbaar voor een gesprek om mijn ervaring verder toe te lichten.
+
+Met vriendelijke groet,
+
+Samer Alsaadni</div>
+        </section>
+
+        <!-- French Section (NEW) -->
+        <section class="letter-card">
+            <div class="card-header">
+                <div class="lang-title">
+                    <i class="fa-solid fa-globe"></i> Lettre de Motivation (Français)
+                    <span class="badge">Version Française</span>
+                </div>
+                <button class="btn-copy" onclick="copyText('french-text')">
+                    <i class="fa-regular fa-copy"></i> Copy Letter
+                </button>
+            </div>
+            
+            <div id="french-text" class="letter-content" dir="ltr">Samer Alsaadni
+Harelbeke, Belgique
+Téléphone: +32 498 164 320
+E-mail: samerguda@gmail.com
+
+Objet : Candidature spontanée / Lettre de motivation
+
+Madame, Monsieur,
+
+Par la présente, je souhaite vous exprimer mon vif intérêt à rejoindre votre entreprise. Résidant à Harelbeke, en Belgique, et fort de plus de 15 ans d'expérience professionnelle, je dispose d'une solide expertise en opérations techniques, gestion de projets, coordination d'équipes et supervision sur le terrain. Très adaptable et apprenant rapidement, je suis entièrement ouvert à contribuer à divers postes opérationnels, techniques ou administratifs au sein de votre organisation.
+
+Au cours de ma carrière, j'ai géré avec succès des missions complexes, dirigé des équipes, coordonné différents intervenants et veillé au respect strict des normes de qualité et de sécurité. Titulaire d'un diplôme de Bachelor, d'un diplôme d'études supérieures en gestion (Postgraduate) et poursuivant actuellement un Master en Management, cette alliance de compétences techniques et managériales me permet de m'intégrer rapidement dans de nouveaux environnements de travail.
+
+Mes principaux atouts :
+- Organisation et coordination : Capacité éprouvée à gérer les opérations quotidiennes, planifier les tâches et résoudre efficacement les défis opérationnels.
+- Compétences techniques et numériques : Maîtrise des outils techniques modernes, des logiciels de gestion et du traitement des données.
+- Fiabilité et multilinguisme : Maîtrise courante de l'anglais, langue maternelle arabe, et niveau pratique en néerlandais, que je continue de perfectionner pour assurer une communication fluide avec les équipes locales.
+
+Dynamique, rigoureux et motivé, je suis prêt à m'investir pleinement pour apporter une vraie valeur ajoutée à vos activités. Je reste à votre entière disposition pour un entretien afin de vous exposer plus en détail mon parcours et mes motivations.
+
+Je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées.
+
+Samer Alsaadni</div>
+        </section>
+
+        <!-- English Section -->
+        <section class="letter-card">
+            <div class="card-header">
+                <div class="lang-title">
+                    <i class="fa-solid fa-globe"></i> Open Application Letter (English)
+                    <span class="badge">International Standard</span>
+                </div>
+                <button class="btn-copy" onclick="copyText('english-text')">
+                    <i class="fa-regular fa-copy"></i> Copy Letter
+                </button>
+            </div>
+            
+            <div id="english-text" class="letter-content" dir="ltr">Samer Alsaadni
+Harelbeke, Belgium
+Phone: +32 498 164 320
+Email: samerguda@gmail.com
+
+Subject: Open Application / Motivation Letter
+
+Dear Hiring Manager,
+
+I am writing to express my enthusiastic interest in joining your organization. Based in Harelbeke, Belgium, and bringing over 15 years of diverse professional experience, I offer a strong background in technical operations, project management, team coordination, and site supervision. I am highly adaptable, fast-learning, and fully open to contributing across various operational, managerial, or technical roles within your company.
+
+Throughout my career, I have successfully managed complex tasks, led teams, coordinated with multiple stakeholders, and ensured strict quality and safety compliance. My academic credentials include a Bachelor’s degree, a Postgraduate Diploma in Management, and ongoing advanced management studies. This combination of technical understanding and management knowledge allows me to quickly integrate into different work environments and deliver practical results.
+
+Key strengths I bring to your team include:
+- Strong Leadership & Coordination: Proven ability to manage daily operations, organize schedules, supervise site activities, and solve operational challenges effectively.
+- Technical & Digital Proficiency: Hands-on experience with modern technical tools, software, data handling, and project management applications.
+- Reliability & Multilingual Skills: Fluent in English, native in Arabic, and holding an A2 level in Dutch (Nederlands)—which I am continuously improving to ensure smooth communication with colleagues and local teams on site.
+
+I am a dedicated, hard-working professional with a strong work ethic, ready to take on responsibilities and add value to your day-to-day operations. I am available for an interview at your convenience and look forward to the opportunity to discuss how my skill set can benefit your team.
+
+Thank you for your time and consideration.
+
+Sincerely,
+
+Samer Alsaadni</div>
+        </section>
+
+        <!-- Arabic Section -->
+        <section class="letter-card">
+            <div class="card-header">
+                <div class="lang-title">
+                    <i class="fa-solid fa-globe"></i> خطاب دافع مفتوح (اللغة العربية)
+                    <span class="badge">النسخة العربية</span>
+                </div>
+                <button class="btn-copy" onclick="copyText('arabic-text')">
+                    <i class="fa-regular fa-copy"></i> Copy Letter
+                </button>
+            </div>
+            
+            <div id="arabic-text" class="letter-content" dir="rtl">سامر السعدني
+هاريلبيك، بلجيكا
+هاتف: 32498164320+
+بريد إلكتروني: samerguda@gmail.com
+
+الموضوع: طلب توظيف مفتوح / خطاب دافع
+
+عزيزي مسؤول التوظيف،
+
+أكتب إليكم للتعبير عن اهتمامي الشديد بالانضمام إلى مؤسستكم. أقيم في مدينة هاريلبيك ببلجيكا، وأملك أكثر من 15 عامًا من الخبرة المهنية المتنوعة في مجالات العمليات الفنية، وإدارة المشاريع، وتنسيق فرق العمل، والإشراف الميداني. أتمتع بمرونة عالية، وسرعة في التعلم، واستعداد تام للمساهمة في مختلف الأدوار التشغيلية أو الإدارية أو الفنية داخل شركتكم.
+
+خلال مسيرتي المهنية، نجحت في إدارة مهام معقدة، وقيادة فرق العمل، والتنسيق مع مختلف الجهات، وضمان الالتزام الكامل بمعايير الجودة والسلامة. تشمل مؤهلاتي الأكاديمية درجة البكالوريوس، ودبلوم دراسات عليا في الإدارة، إلى جانب متابعة دراسات عليا متقدمة في الإدارة حاليًا. هذا المزيج بين الفهم الفني والمعرفة الإدارية يتيح لي التكيف السريع مع بيئات العمل المختلفة وتحقيق نتائج عملية.
+
+من أبرز نقاط القوة التي أقدمها لفريقكم:
+- القيادة والتنسيق القوي: قدرة مثبتة على إدارة العمليات اليومية، وتنظيم الجداول الزمنية، والإشراف الميداني، وحل المشكلات التشغيلية بفاعلية.
+- الكفاءة الفنية والرقمية: خبرة عملية في استخدام الأدوات الفنية الحديثة، والبرامج، وإدارة البيانات، وتطبيقات إدارة المشاريع.
+- الموثوقية وتعدد اللغات: إتقان اللغة الإنجليزية، واللغة العربية (اللغة الأم)، بالإضافة إلى مستوى A2 في اللغة الهولندية، والتي أعمل على تحسينها باستمرار لضمان التواصل السلس مع الزملاء والفرق المحلية في موقع العمل.
+
+أنا مهني ملتزم وأعمل بجد، وأمتلك أخلاقيات عمل عالية، ومستعد لتحمل المسؤوليات وإضافة قيمة حقيقية لعملياتكم اليومية. أنا متاح لإجراء مقابلة في الوقت الذي يناسبكم، وأتطلع إلى فرصة مناقشة كيف يمكن لمهاراتي أن تفيد فريقكم.
+
+شاكرًا لكم حسن وقتكم واهتمامكم.
+
+وتفضلوا بقبول فائق الاحترام،
+
+سامر السعدني</div>
+        </section>
+
+    </main>
+
+    <div id="toast" class="toast">
+        <i class="fa-solid fa-circle-check" style="color: #22c55e;"></i>
+        <span>Copied to clipboard!</span>
+    </div>
+
+    <footer>
+        <p>© Samer Alsaadni - Professional Motivation Letters Hub</p>
+    </footer>
+
+    <script>
+        function copyText(elementId) {
+            const textToCopy = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showToast();
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
