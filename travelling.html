@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelling - European Destinations</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#0369a1',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 9999px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <!-- Logo & Title -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-2.5 bg-gradient-to-tr from-sky-500 to-indigo-600 text-white rounded-xl shadow-md shadow-sky-500/20">
+                            <i class="fa-solid font-bold fa-compass text-2xl animate-spin-slow"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 dark:from-sky-400 dark:via-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">
+                                Travelling
+                            </h1>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">European Driving Tour Guide</p>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Controls -->
+                    <div class="flex items-center gap-2 md:hidden">
+                        <button id="dark-toggle-mobile" class="p-2.5 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors">
+                            <i class="fa-solid fa-moon dark:hidden"></i>
+                            <i class="fa-solid fa-sun hidden dark:block text-amber-400"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search and Controls -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                    <!-- Search Input -->
+                    <div class="relative flex-1 sm:w-80">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="text" id="search-input" placeholder="Search country or city..." 
+                            class="w-full pl-10 pr-10 py-2.5 bg-slate-100 dark:bg-slate-800/80 border border-transparent focus:border-sky-500 dark:focus:border-sky-400 rounded-xl text-sm transition-all outline-none focus:ring-2 focus:ring-sky-500/20">
+                        <button id="clear-search" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+                    <!-- Theme Toggle (Desktop) -->
+                    <button id="dark-toggle" class="hidden md:flex items-center justify-center p-2.5 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl transition-colors">
+                        <i class="fa-solid fa-moon dark:hidden"></i>
+                        <i class="fa-solid fa-sun hidden dark:block text-amber-400"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Region Filter Chips -->
+            <div id="region-filters" class="flex items-center gap-2 mt-4 overflow-x-auto pb-1 custom-scrollbar text-sm font-medium">
+                <!-- Dynamically Populated Filters -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Stats & Actions Bar -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
+            <div class="flex items-center gap-3 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                <span id="stats-counter" class="font-medium text-slate-700 dark:text-slate-200">Loading destinations...</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="expand-all-btn" class="px-3 py-1.5 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-colors border border-slate-200 dark:border-slate-700">
+                    <i class="fa-solid fa-angles-down mr-1"></i> Expand All
+                </button>
+                <button id="collapse-all-btn" class="px-3 py-1.5 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-colors border border-slate-200 dark:border-slate-700">
+                    <i class="fa-solid fa-angles-up mr-1"></i> Collapse All
+                </button>
+            </div>
+        </div>
+
+        <!-- Destinations Container -->
+        <div id="destinations-container" class="space-y-10">
+            <!-- Dynamically filled with regions and countries -->
+        </div>
+
+        <!-- Empty Search State -->
+        <div id="no-results" class="hidden text-center py-20">
+            <div class="inline-flex p-4 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-400 mb-4">
+                <i class="fa-solid fa-compass-drafting text-4xl"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-slate-700 dark:text-slate-200">No destinations found</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto mt-1">Try adjusting your search query or switching selected region filters.</p>
+        </div>
+    </main>
+
+    <!-- Video Player Modal -->
+    <div id="video-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-4xl w-full overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 transform scale-95 transition-transform duration-300" id="video-modal-card">
+            <div class="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-800">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-brands fa-youtube text-red-500 text-xl"></i>
+                    <h3 id="modal-title" class="font-bold text-slate-800 dark:text-slate-100 text-lg">Driving Tour</h3>
+                </div>
+                <button id="close-modal" class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="relative aspect-video w-full bg-black">
+                <iframe id="video-iframe" class="w-full h-full" src="" title="Driving Tour Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="p-4 bg-slate-50 dark:bg-slate-800/50 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
+                <span>Showing YouTube search query stream inside interactive player</span>
+                <a id="external-yt-link" href="#" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:underline font-semibold flex items-center gap-1">
+                    Open directly on YouTube <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-4 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl shadow-xl transition-all duration-300 transform translate-y-20 opacity-0 border border-slate-700 dark:border-slate-200">
+        <i class="fa-solid fa-circle-check text-emerald-400 dark:text-emerald-600 text-lg"></i>
+        <span id="toast-message" class="text-sm font-medium">Copied!</span>
+    </div>
+
+    <script>
+        const travelData = [
+            {
+                region: "Western Europe",
+                countries: [
+                    { name: "Belgium", cities: ["Brussels", "Antwerp", "Ghent", "Bruges", "Leuven", "Liège", "Charleroi", "Namur", "Mechelen", "Hasselt", "Kortrijk", "Ostend"] },
+                    { name: "France", cities: ["Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Nantes", "Strasbourg", "Montpellier", "Bordeaux", "Lille", "Cannes", "Rennes"] },
+                    { name: "Germany", cities: ["Berlin", "Hamburg", "Munich", "Cologne", "Frankfurt", "Stuttgart", "Düsseldorf", "Leipzig", "Dortmund", "Dresden", "Bremen", "Nuremberg"] },
+                    { name: "Netherlands", cities: ["Amsterdam", "Rotterdam", "The Hague", "Utrecht", "Eindhoven", "Groningen", "Tilburg", "Maastricht", "Arnhem", "Nijmegen", "Delft", "Haarlem"] },
+                    { name: "Luxembourg", cities: ["Luxembourg City", "Esch-sur-Alzette", "Differdange", "Dudelange", "Ettelbruck", "Diekirch", "Strassen", "Bertrange", "Bettembourg", "Pétange", "Schifflange", "Mondorf-les-Bains"] },
+                    { name: "Switzerland", cities: ["Zurich", "Geneva", "Basel", "Bern", "Lausanne", "Lucerne", "Lugano", "St. Gallen", "Winterthur", "Interlaken", "Montreux", "Davos"] },
+                    { name: "Austria", cities: ["Vienna", "Graz", "Salzburg", "Innsbruck", "Linz", "Klagenfurt", "Villach", "Wels", "St. Pölten", "Bregenz", "Eisenstadt", "Wiener Neustadt"] },
+                    { name: "Ireland", cities: ["Dublin", "Cork", "Galway", "Limerick", "Waterford", "Kilkenny", "Sligo", "Drogheda", "Dundalk", "Athlone", "Killarney", "Bray"] },
+                    { name: "United Kingdom", cities: ["London", "Manchester", "Birmingham", "Liverpool", "Edinburgh", "Glasgow", "Bristol", "Leeds", "Cardiff", "Belfast", "Nottingham", "Oxford"] }
+                ]
+            },
+            {
+                region: "Southern Europe",
+                countries: [
+                    { name: "Portugal", cities: ["Lisbon", "Porto", "Braga", "Coimbra", "Faro", "Aveiro", "Setúbal", "Funchal", "Évora", "Viseu", "Leiria", "Guimarães"] },
+                    { name: "Spain", cities: ["Madrid", "Barcelona", "Valencia", "Seville", "Málaga", "Bilbao", "Alicante", "Granada", "Córdoba", "Palma de Mallorca", "Zaragoza", "Salamanca"] },
+                    { name: "Italy", cities: ["Rome", "Milan", "Naples", "Turin", "Florence", "Venice", "Bologna", "Palermo", "Genoa", "Verona", "Pisa", "Bari"] },
+                    { name: "Greece", cities: ["Athens", "Thessaloniki", "Patras", "Heraklion", "Larissa", "Volos", "Rhodes", "Ioannina", "Chania", "Kalamata", "Corfu", "Kavala"] },
+                    { name: "Malta", cities: ["Valletta", "Sliema", "St. Julian's", "Birkirkara", "Mosta", "Qormi", "Mdina", "Victoria", "Mellieħa", "Marsaskala", "Birżebbuġa", "Naxxar"] },
+                    { name: "Cyprus", cities: ["Nicosia", "Limassol", "Larnaca", "Paphos", "Famagusta", "Kyrenia", "Protaras", "Ayia Napa", "Polis", "Paralimni", "Aradippou", "Dali"] },
+                    { name: "Andorra", cities: ["Andorra la Vella", "Escaldes-Engordany", "Encamp", "Sant Julià de Lòria", "La Massana", "Ordino", "Canillo", "Pas de la Casa", "El Serrat", "Arinsal", "Les Escaldes", "Soldeu"] },
+                    { name: "Monaco", cities: ["Monaco", "Monte Carlo", "La Condamine", "Fontvieille", "Larvotto", "Moneghetti", "Saint-Roman", "Saint-Michel", "Les Révoires", "Jardin Exotique", "La Colle", "Port Hercules"] }
+                ]
+            },
+            {
+                region: "Northern Europe",
+                countries: [
+                    { name: "Denmark", cities: ["Copenhagen", "Aarhus", "Odense", "Aalborg", "Esbjerg", "Randers", "Horsens", "Kolding", "Vejle", "Roskilde", "Herning", "Helsingør"] },
+                    { name: "Sweden", cities: ["Stockholm", "Gothenburg", "Malmö", "Uppsala", "Västerås", "Örebro", "Linköping", "Helsingborg", "Jönköping", "Lund", "Umeå", "Kiruna"] },
+                    { name: "Norway", cities: ["Oslo", "Bergen", "Trondheim", "Stavanger", "Tromsø", "Drammen", "Kristiansand", "Fredrikstad", "Ålesund", "Sandnes", "Bodø", "Lillehammer"] },
+                    { name: "Finland", cities: ["Helsinki", "Espoo", "Tampere", "Vantaa", "Oulu", "Turku", "Jyväskylä", "Kuopio", "Lahti", "Pori", "Rovaniemi", "Vaasa"] },
+                    { name: "Iceland", cities: ["Reykjavík", "Kópavogur", "Hafnarfjörður", "Akureyri", "Reykjanesbær", "Garðabær", "Mosfellsbær", "Selfoss", "Akranes", "Vestmannaeyjar", "Hveragerði", "Ísafjörður"] }
+                ]
+            },
+            {
+                region: "Central & Eastern Europe",
+                countries: [
+                    { name: "Poland", cities: ["Warsaw", "Kraków", "Wrocław", "Poznań", "Gdańsk", "Łódź", "Szczecin", "Lublin", "Katowice", "Białystok", "Toruń", "Zakopane"] },
+                    { name: "Czechia", cities: ["Prague", "Brno", "Ostrava", "Plzeň", "Liberec", "Olomouc", "České Budějovice", "Hradec Králové", "Pardubice", "Karlovy Vary", "Zlín", "Český Krumlov"] },
+                    { name: "Slovakia", cities: ["Bratislava", "Košice", "Prešov", "Žilina", "Nitra", "Banská Bystrica", "Trnava", "Trenčín", "Martin", "Poprad", "Piešťany", "Levoča"] },
+                    { name: "Hungary", cities: ["Budapest", "Debrecen", "Szeged", "Miskolc", "Pécs", "Győr", "Nyíregyháza", "Kecskemét", "Székesfehérvár", "Eger", "Sopron", "Siófok"] },
+                    { name: "Slovenia", cities: ["Ljubljana", "Maribor", "Koper", "Celje", "Kranj", "Velenje", "Novo Mesto", "Ptuj", "Bled", "Portorož", "Bohinj", "Piran"] },
+                    { name: "Croatia", cities: ["Zagreb", "Split", "Dubrovnik", "Rijeka", "Zadar", "Osijek", "Pula", "Šibenik", "Varaždin", "Karlovac", "Trogir", "Rovinj"] },
+                    { name: "Serbia", cities: ["Belgrade", "Novi Sad", "Niš", "Kragujevac", "Subotica", "Čačak", "Zrenjanin", "Pančevo", "Kraljevo", "Užice", "Sombor", "Novi Pazar"] },
+                    { name: "Romania", cities: ["Bucharest", "Cluj-Napoca", "Timișoara", "Iași", "Constanța", "Brașov", "Craiova", "Sibiu", "Oradea", "Arad", "Ploiești", "Suceava"] },
+                    { name: "Bulgaria", cities: ["Sofia", "Plovdiv", "Varna", "Burgas", "Ruse", "Stara Zagora", "Pleven", "Sliven", "Dobrich", "Shumen", "Veliko Tarnovo", "Blagoevgrad"] },
+                    { name: "Bosnia and Herzegovina", cities: ["Sarajevo", "Banja Luka", "Mostar", "Tuzla", "Zenica", "Bijeljina", "Brčko", "Travnik", "Bihać", "Jajce", "Trebinje", "Neum"] },
+                    { name: "Montenegro", cities: ["Podgorica", "Budva", "Kotor", "Bar", "Herceg Novi", "Nikšić", "Tivat", "Cetinje", "Ulcinj", "Žabljak", "Perast", "Pljevlja"] },
+                    { name: "North Macedonia", cities: ["Skopje", "Ohrid", "Bitola", "Kumanovo", "Prilep", "Tetovo", "Veles", "Strumica", "Štip", "Gostivar", "Kruševo", "Gevgelija"] },
+                    { name: "Albania", cities: ["Tirana", "Durrës", "Vlorë", "Shkodër", "Elbasan", "Fier", "Korçë", "Berat", "Gjirokastër", "Sarandë", "Krujë", "Pogradec"] },
+                    { name: "Kosovo", cities: ["Pristina", "Prizren", "Peja", "Gjilan", "Ferizaj", "Gjakova", "Mitrovica", "Vushtrri", "Suhareka", "Rahovec", "Podujevo", "Lipjan"] }
+                ]
+            },
+            {
+                region: "Baltic States",
+                countries: [
+                    { name: "Estonia", cities: ["Tallinn", "Tartu", "Narva", "Pärnu", "Kohtla-Järve", "Viljandi", "Rakvere", "Maardu", "Kuressaare", "Haapsalu", "Võru", "Valga"] },
+                    { name: "Latvia", cities: ["Riga", "Daugavpils", "Liepāja", "Jelgava", "Jūrmala", "Ventspils", "Rēzekne", "Valmiera", "Ogre", "Cēsis", "Kuldīga", "Sigulda"] },
+                    { name: "Lithuania", cities: ["Vilnius", "Kaunas", "Klaipėda", "Šiauliai", "Panevėžys", "Alytus", "Marijampolė", "Mažeikiai", "Jonava", "Utena", "Telšiai", "Druskininkai"] }
+                ]
+            },
+            {
+                region: "Eastern Europe",
+                countries: [
+                    { name: "Ukraine", cities: ["Kyiv", "Lviv", "Odesa", "Kharkiv", "Dnipro", "Zaporizhzhia", "Vinnytsia", "Poltava", "Chernihiv", "Chernivtsi", "Uzhhorod", "Ivano-Frankivsk"] },
+                    { name: "Moldova", cities: ["Chișinău", "Bălți", "Bender", "Tiraspol", "Cahul", "Ungheni", "Soroca", "Orhei", "Comrat", "Ceadîr-Lunga", "Hîncești", "Edineț"] },
+                    { name: "Belarus", cities: ["Minsk", "Gomel", "Mogilev", "Vitebsk", "Grodno", "Brest", "Bobruisk", "Baranavichy", "Borisov", "Pinsk", "Orsha", "Novopolotsk"] },
+                    { name: "Russia", cities: ["Moscow", "Saint Petersburg", "Kazan", "Novosibirsk", "Yekaterinburg", "Nizhny Novgorod", "Samara", "Rostov-on-Don", "Sochi", "Krasnodar", "Vladivostok", "Kaliningrad"] }
+                ]
+            },
+            {
+                region: "Transcontinental / Regionally Included",
+                countries: [
+                    { name: "Turkey", cities: ["Istanbul", "Ankara", "Izmir", "Bursa", "Antalya", "Adana", "Gaziantep", "Konya", "Mersin", "Kayseri", "Trabzon", "Diyarbakır"] },
+                    { name: "Georgia", cities: ["Tbilisi", "Batumi", "Kutaisi", "Rustavi", "Gori", "Zugdidi", "Poti", "Telavi", "Borjomi", "Akhaltsikhe", "Mestia", "Sighnaghi"] },
+                    { name: "Armenia", cities: ["Yerevan", "Gyumri", "Vanadzor", "Vagharshapat", "Hrazdan", "Abovyan", "Kapan", "Armavir", "Artashat", "Gavar", "Dilijan", "Jermuk"] },
+                    { name: "Azerbaijan", cities: ["Baku", "Ganja", "Sumqayit", "Lankaran", "Mingachevir", "Nakhchivan", "Shaki", "Quba", "Gabala", "Shamakhi", "Yevlakh", "Naftalan"] },
+                    { name: "Vatican City", cities: ["Vatican City"] }
+                ]
+            }
+        ];
+
+        let selectedRegion = "All";
+        let searchQuery = "";
+        let openCountries = new Set();
+
+        const destinationsContainer = document.getElementById('destinations-container');
+        const regionFilters = document.getElementById('region-filters');
+        const searchInput = document.getElementById('search-input');
+        const clearSearchBtn = document.getElementById('clear-search');
+        const statsCounter = document.getElementById('stats-counter');
+        const noResults = document.getElementById('no-results');
+        const darkToggle = document.getElementById('dark-toggle');
+        const darkToggleMobile = document.getElementById('dark-toggle-mobile');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        // Modal Elements
+        const videoModal = document.getElementById('video-modal');
+        const videoModalCard = document.getElementById('video-modal-card');
+        const modalTitle = document.getElementById('modal-title');
+        const videoIframe = document.getElementById('video-iframe');
+        const externalYtLink = document.getElementById('external-yt-link');
+        const closeModalBtn = document.getElementById('close-modal');
+
+        function initTheme() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+
+        darkToggle.addEventListener('click', toggleTheme);
+        darkToggleMobile.addEventListener('click', toggleTheme);
+
+        let toastTimeout;
+        function showToast(message) {
+            toastMessage.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast(`Copied: "${text}"!`);
+                }).catch(() => fallbackCopy(text));
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast(`Copied: "${text}"!`);
+            } catch (err) {
+                showToast('Failed to copy text');
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function openDrivingTour(locationName) {
+            const query = encodeURIComponent(`${locationName} driving tour`);
+            const searchUrl = `https://www.youtube.com/results?search_query=${query}`;
+            
+            // Set up YouTube Search Embed / Link
+            modalTitle.textContent = `${locationName} - Driving Tour`;
+            // Youtube search video embed workaround via search embed URL format
+            videoIframe.src = `https://www.youtube.com/embed?listType=search&list=${query}&autoplay=1`;
+            externalYtLink.href = searchUrl;
+
+            // Show Modal
+            videoModal.classList.remove('opacity-0', 'pointer-events-none');
+            videoModal.classList.add('opacity-100');
+            videoModalCard.classList.remove('scale-95');
+            videoModalCard.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            videoModal.classList.remove('opacity-100');
+            videoModal.classList.add('opacity-0', 'pointer-events-none');
+            videoModalCard.classList.remove('scale-100');
+            videoModalCard.classList.add('scale-95');
+            videoIframe.src = '';
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) closeModal();
+        });
+
+        function renderRegionFilters() {
+            const regions = ["All", ...travelData.map(r => r.region)];
+            regionFilters.innerHTML = regions.map(reg => `
+                <button onclick="setRegion('${reg}')" 
+                    class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+                        selectedRegion === reg 
+                        ? 'bg-sky-600 text-white shadow-md shadow-sky-500/20' 
+                        : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/60 border border-slate-200 dark:border-slate-800'
+                    }">
+                    ${reg}
+                </button>
+            `).join('');
+        }
+
+        function setRegion(region) {
+            selectedRegion = region;
+            renderRegionFilters();
+            renderDestinations();
+        }
+
+        function toggleCountry(countryName) {
+            if (openCountries.has(countryName)) {
+                openCountries.delete(countryName);
+            } else {
+                openCountries.add(countryName);
+            }
+            renderDestinations();
+        }
+
+        document.getElementById('expand-all-btn').addEventListener('click', () => {
+            travelData.forEach(r => r.countries.forEach(c => openCountries.add(c.name)));
+            renderDestinations();
+        });
+
+        document.getElementById('collapse-all-btn').addEventListener('click', () => {
+            openCountries.clear();
+            renderDestinations();
+        });
+
+        function renderDestinations() {
+            let totalCountries = 0;
+            let totalCities = 0;
+            let html = '';
+
+            const isSearching = searchQuery.trim().length > 0;
+            const query = searchQuery.toLowerCase().trim();
+
+            travelData.forEach(regionBlock => {
+                // Check region filter
+                if (selectedRegion !== "All" && selectedRegion !== regionBlock.region) return;
+
+                // Filter countries & cities based on query
+                const filteredCountries = regionBlock.countries.filter(c => {
+                    const countryMatches = c.name.toLowerCase().includes(query);
+                    const cityMatches = c.cities.some(city => city.toLowerCase().includes(query));
+                    return countryMatches || cityMatches;
+                });
+
+                if (filteredCountries.length === 0) return;
+
+                html += `
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <h2 class="text-xl font-bold tracking-tight text-slate-800 dark:text-slate-100">${regionBlock.region}</h2>
+                            <span class="px-2.5 py-0.5 text-xs font-semibold bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full">
+                                ${filteredCountries.length} countries
+                            </span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                `;
+
+                filteredCountries.forEach(country => {
+                    totalCountries++;
+                    const matchingCities = isSearching 
+                        ? country.cities.filter(city => city.toLowerCase().includes(query) || country.name.toLowerCase().includes(query))
+                        : country.cities;
+
+                    totalCities += matchingCities.length;
+
+                    // If user is searching, automatically show city details
+                    const isOpen = isSearching || openCountries.has(country.name);
+
+                    html += `
+                        <div class="bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 flex flex-col overflow-hidden">
+                            <!-- Country Header -->
+                            <div class="p-4 bg-slate-50/50 dark:bg-slate-800/40 border-b border-slate-100 dark:border-slate-700/50 flex flex-col justify-between gap-3">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2 cursor-pointer select-none" onclick="toggleCountry('${country.name}')">
+                                        <button class="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}">
+                                            <i class="fa-solid fa-chevron-right"></i>
+                                        </button>
+                                        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-base">${country.name}</h3>
+                                        <span class="text-xs text-slate-400 font-normal">(${country.cities.length})</span>
+                                    </div>
+                                </div>
+
+                                <!-- Country Actions -->
+                                <div class="flex items-center gap-2">
+                                    <button onclick="copyToClipboard('${country.name}')" 
+                                        class="flex-1 px-3 py-1.5 text-xs font-medium bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-600 rounded-lg transition-colors flex items-center justify-center gap-1.5">
+                                        <i class="fa-regular fa-copy"></i> Copy Country
+                                    </button>
+                                    <button onclick="openDrivingTour('${country.name}')" 
+                                        class="flex-1 px-3 py-1.5 text-xs font-medium bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900/50 hover:bg-red-100 dark:hover:bg-red-900/60 rounded-lg transition-colors flex items-center justify-center gap-1.5">
+                                        <i class="fa-brands fa-youtube"></i> Driving Tour
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Cities Container (Collapsible) -->
+                            <div class="${isOpen ? 'block' : 'hidden'} p-4 flex-1">
+                                <div class="grid grid-cols-1 gap-2">
+                                    ${matchingCities.map(city => `
+                                        <div class="group flex items-center justify-between p-2 rounded-xl bg-slate-50/80 dark:bg-slate-900/40 hover:bg-sky-50/60 dark:hover:bg-slate-700/40 border border-slate-100 dark:border-slate-800 transition-colors">
+                                            <span class="text-xs font-semibold text-slate-700 dark:text-slate-300 ml-1">${city}</span>
+                                            <div class="flex items-center gap-1 opacity-90 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <button onclick="copyToClipboard('${city.replace(/'/g, "\\'")} driving tour')" 
+                                                    title="Copy city driving tour string"
+                                                    class="p-1.5 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-white dark:hover:bg-slate-700 rounded-md transition-colors text-xs">
+                                                    <i class="fa-regular fa-copy"></i>
+                                                </button>
+                                                <button onclick="openDrivingTour('${city.replace(/'/g, "\\'")}, ${country.name.replace(/'/g, "\\'")}')" 
+                                                    title="Watch driving tour"
+                                                    class="p-1.5 text-red-500 hover:text-red-600 dark:text-red-400 hover:bg-white dark:hover:bg-slate-700 rounded-md transition-colors text-xs">
+                                                    <i class="fa-brands fa-youtube"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            destinationsContainer.innerHTML = html;
+
+            // Stats update
+            statsCounter.innerHTML = `Showing <span class="font-bold text-sky-600 dark:text-sky-400">${totalCountries}</span> countries & <span class="font-bold text-sky-600 dark:text-sky-400">${totalCities}</span> cities`;
+
+            // Toggle No Results
+            if (totalCountries === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            if (searchQuery.trim().length > 0) {
+                clearSearchBtn.classList.remove('hidden');
+            } else {
+                clearSearchBtn.classList.add('hidden');
+            }
+            renderDestinations();
+        });
+
+        clearSearchBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            searchQuery = '';
+            clearSearchBtn.classList.add('hidden');
+            renderDestinations();
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            renderRegionFilters();
+            renderDestinations();
+        });
+    </script>
+</body>
+</html>
