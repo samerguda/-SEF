@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travelling - Antarctica Research Stations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-primary: #0b1329;
+      --bg-secondary: #172a46;
+      --card-bg: #172a46;
+      --card-border: #2a4365;
+      --text-main: #f0f8ff;
+      --text-muted: #90cdf4;
+      --accent-color: #38bdf8;
+      --accent-hover: #0284c7;
+      --accent-glow: rgba(56, 189, 248, 0.2);
+      --yt-red: #ff0000;
+      --city-btn-bg: #1e3a8a;
+      --city-btn-hover: #1d4ed8;
+      --toast-bg: #0284c7;
+      --toast-text: #ffffff;
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f0f9ff;
+      --bg-secondary: #ffffff;
+      --card-bg: #ffffff;
+      --card-border: #bae6fd;
+      --text-main: #0c4a6e;
+      --text-muted: #0284c7;
+      --accent-color: #0284c7;
+      --accent-hover: #0369a1;
+      --accent-glow: rgba(2, 132, 199, 0.1);
+      --city-btn-bg: #e0f2fe;
+      --city-btn-hover: #bae6fd;
+      --toast-bg: #0c4a6e;
+      --toast-text: #ffffff;
+      --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', 'Tajawal', sans-serif;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    @media (min-width: 768px) {
+      .header-container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+    }
+
+    .logo-text h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+      background: linear-gradient(135deg, var(--text-main), var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .logo-text p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .controls-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      position: relative;
+      flex-grow: 1;
+      min-width: 240px;
+    }
+
+    .search-box i {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.75rem 2.75rem 0.75rem 1rem;
+      background-color: var(--bg-primary);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .btn-action {
+      background-color: var(--bg-primary);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .btn-action:hover {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      flex-grow: 1;
+      width: 100%;
+    }
+
+    .info-banner {
+      background: var(--bg-secondary);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .info-banner i {
+      font-size: 1.5rem;
+      color: var(--accent-color);
+    }
+
+    .stats-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding: 1rem 1.5rem;
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+    }
+
+    .stats-info {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .stats-info span strong {
+      color: var(--accent-color);
+    }
+
+    .stations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .station-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      direction: ltr;
+    }
+
+    .station-card:hover {
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
+    }
+
+    .station-info {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .station-num {
+      background: var(--accent-glow);
+      color: var(--accent-color);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .station-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .station-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: var(--bg-primary);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .icon-btn:hover {
+      background: var(--accent-color);
+      color: #fff;
+      border-color: var(--accent-color);
+    }
+
+    .icon-btn.yt-btn:hover {
+      background: var(--yt-red);
+      border-color: var(--yt-red);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background-color: var(--toast-bg);
+      color: var(--toast-text);
+      padding: 0.85rem 1.5rem;
+      border-radius: 30px;
+      box-shadow: var(--shadow-lg);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      z-index: 1000;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      direction: ltr;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--card-border);
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-icon">
+          <i class="fa-solid fa-snowflake"></i>
+        </div>
+        <div class="logo-text">
+          <h1>Travelling Antarctica</h1>
+          <p>Research Stations & Driving Tours</p>
+        </div>
+      </div>
+
+      <div class="controls-group">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" class="search-input" placeholder="بحث عن محطة بحثية...">
+        </div>
+        <button class="btn-action" id="themeToggleBtn" onclick="toggleTheme()">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="info-banner">
+      <i class="fa-solid fa-circle-info"></i>
+      <div>
+        Antarctica has no sovereign countries or permanent cities. Below are the 12 main research stations and scientific bases across the continent.
+      </div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stats-info">
+        <span>المحطات والقواعد البحثية: <strong id="stationCount">0</strong></span>
+      </div>
+    </div>
+
+    <div class="stations-grid" id="stationsGrid"></div>
+  </main>
+
+  <div class="toast" id="toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toastMsg">تم النسخ بنجاح!</span>
+  </div>
+
+  <footer>
+    <p>Travelling - Antarctica Research Stations &copy; 2026</p>
+  </footer>
+
+  <script>
+    const antarcticaStations = [
+      { id: 1, name: "McMurdo Station" },
+      { id: 2, name: "Amundsen–Scott South Pole Station" },
+      { id: 3, name: "Palmer Station" },
+      { id: 4, name: "Rothera Research Station" },
+      { id: 5, name: "Vostok Station" },
+      { id: 6, name: "Concordia Station" },
+      { id: 7, name: "Halley Research Station" },
+      { id: 8, name: "Neumayer Station III" },
+      { id: 9, name: "Mawson Station" },
+      { id: 10, name: "Casey Station" },
+      { id: 11, name: "Davis Station" },
+      { id: 12, name: "Scott Base" }
+    ];
+
+    function renderCards(data) {
+      const container = document.getElementById('stationsGrid');
+      container.innerHTML = '';
+
+      data.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'station-card';
+
+        const safeName = item.name.replace(/'/g, "\\'");
+
+        card.innerHTML = `
+          <div class="station-info">
+            <span class="station-num">${item.id}</span>
+            <h2 class="station-name">${item.name}</h2>
+          </div>
+          <div class="station-actions">
+            <button class="icon-btn" title="Copy '${item.name} driving tour'" onclick="copyText('${safeName} driving tour')">
+              <i class="fa-regular fa-copy"></i>
+            </button>
+            <button class="icon-btn yt-btn" title="Search station tours on YouTube" onclick="openYT('${safeName} driving tour')">
+              <i class="fa-brands fa-youtube"></i>
+            </button>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      document.getElementById('stationCount').textContent = data.length;
+    }
+
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(`Copied: "${text}"`);
+      }).catch(err => {
+        showToast(`Failed to copy`);
+      });
+    }
+
+    function openYT(query) {
+      const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+      window.open(url, '_blank');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const btn = document.getElementById('themeToggleBtn');
+      if (currentTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        btn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        btn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+      }
+    }
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase().trim();
+      if (!term) {
+        renderCards(antarcticaStations);
+        return;
+      }
+
+      const filtered = antarcticaStations.filter(s => s.name.toLowerCase().includes(term));
+      renderCards(filtered);
+    });
+
+    renderCards(antarcticaStations);
+  </script>
+</body>
+</html>
