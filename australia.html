@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelling - Australia & Oceania Driving Tours</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        ocean: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                            950: '#042f2e'
+                        },
+                        cyanbrand: {
+                            50: '#ecfeff',
+                            400: '#22d3ee',
+                            500: '#06b6d4',
+                            600: '#0891b2',
+                            700: '#0e7490'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif; }
+        .en-font { font-family: 'Plus Jakarta Sans', 'Tajawal', sans-serif; }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(13, 148, 136, 0.3);
+            border-radius: 9999px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(45, 212, 191, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                
+                <!-- Logo & Header Title -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3 space-x-reverse">
+                        <div class="p-3 bg-gradient-to-tr from-ocean-600 via-cyanbrand-600 to-teal-400 text-white rounded-2xl shadow-lg shadow-ocean-500/20 flex items-center justify-center">
+                            <i class="fa-solid fa-water text-2xl animate-pulse"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl sm:text-2xl font-black tracking-tight bg-gradient-to-r from-ocean-700 via-cyanbrand-600 to-teal-500 dark:from-ocean-300 dark:via-cyanbrand-300 dark:to-teal-300 bg-clip-text text-transparent">
+                                Travelling - Australia & Oceania
+                            </h1>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 font-semibold mt-0.5">
+                                دليل جولات القيادة الافتراضية لقارة أوقيانوسيا (22 دولة وإقليم)
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Mode Toggle Button -->
+                    <div class="flex items-center gap-2 md:hidden">
+                        <button id="dark-toggle-mobile" aria-label="Toggle dark mode" class="p-2.5 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors border border-slate-200 dark:border-slate-800">
+                            <i class="fa-solid fa-moon dark:hidden text-lg"></i>
+                            <i class="fa-solid fa-sun hidden dark:block text-amber-400 text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search Input & Theme Toggle Button -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                    <div class="relative flex-1 sm:w-80">
+                        <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="text" id="search-input" placeholder="ابحث عن دولة أو مدينة..." 
+                            class="w-full pr-10 pl-10 py-2.5 bg-slate-100 dark:bg-slate-800/90 border border-transparent focus:border-ocean-500 dark:focus:border-ocean-400 rounded-xl text-sm transition-all outline-none focus:ring-2 focus:ring-ocean-500/20 text-slate-800 dark:text-slate-100 placeholder-slate-400">
+                        <button id="clear-search" class="hidden absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+                    <!-- Desktop Dark/Light Toggle -->
+                    <button id="dark-toggle" aria-label="Toggle theme" class="hidden md:flex items-center justify-center p-2.5 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 rounded-xl transition-colors">
+                        <i class="fa-solid fa-moon dark:hidden text-lg"></i>
+                        <i class="fa-solid fa-sun hidden dark:block text-amber-400 text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Statistics Banner Card -->
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-4 sm:p-5 mb-8 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="flex flex-wrap items-center gap-4 sm:gap-6">
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <div class="p-2.5 bg-ocean-50 dark:bg-ocean-950/60 text-ocean-600 dark:text-ocean-400 rounded-xl">
+                        <i class="fa-solid fa-earth-oceania text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold block">الإقليم / القارة</span>
+                        <span class="font-bold text-slate-800 dark:text-slate-100 text-sm">Australia & Oceania</span>
+                    </div>
+                </div>
+                
+                <div class="h-8 w-px bg-slate-200 dark:bg-slate-800 hidden sm:block"></div>
+
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <div class="p-2.5 bg-cyanbrand-50 dark:bg-cyanbrand-950/60 text-cyanbrand-600 dark:text-cyanbrand-400 rounded-xl">
+                        <i class="fa-solid fa-flag text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold block">الدول والأقاليم</span>
+                        <span id="stat-countries" class="font-bold text-slate-800 dark:text-slate-100 text-sm">22</span>
+                    </div>
+                </div>
+
+                <div class="h-8 w-px bg-slate-200 dark:bg-slate-800 hidden sm:block"></div>
+
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <div class="p-2.5 bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 rounded-xl">
+                        <i class="fa-solid fa-city text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold block">المدن والبلدات</span>
+                        <span id="stat-cities" class="font-bold text-slate-800 dark:text-slate-100 text-sm">243</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Expand and Collapse Controls -->
+            <div class="flex items-center gap-2 pt-2 md:pt-0 border-t md:border-t-0 border-slate-100 dark:border-slate-800">
+                <button id="expand-all-btn" class="px-3.5 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-xl transition-colors border border-slate-200 dark:border-slate-700 flex items-center gap-1.5">
+                    <i class="fa-solid fa-angles-down text-slate-400"></i> توسيع الكل
+                </button>
+                <button id="collapse-all-btn" class="px-3.5 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-xl transition-colors border border-slate-200 dark:border-slate-700 flex items-center gap-1.5">
+                    <i class="fa-solid fa-angles-up text-slate-400"></i> طي الكل
+                </button>
+            </div>
+        </div>
+
+        <!-- Container for Rendered Cards -->
+        <div id="countries-container" class="space-y-6">
+            <!-- Populated via JS -->
+        </div>
+
+        <!-- Empty Search View -->
+        <div id="no-results" class="hidden text-center py-20 bg-white dark:bg-slate-900/60 rounded-3xl border border-slate-200 dark:border-slate-800 my-8">
+            <div class="inline-flex p-4 bg-ocean-50 dark:bg-ocean-950/50 text-ocean-500 rounded-full mb-4">
+                <i class="fa-solid fa-compass text-4xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100">لم يتم العثور على أية دولة أو مدينة مطابقة</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto mt-2">جرّب البحث باسم دولة أو مدينة أخرى في قارة أوقيانوسيا.</p>
+        </div>
+    </main>
+
+    <div id="toast" class="fixed bottom-6 left-6 z-50 flex items-center gap-3 px-5 py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl shadow-2xl transition-all duration-300 transform translate-y-24 opacity-0 border border-slate-800 dark:border-slate-200 max-w-sm">
+        <div class="p-1.5 bg-ocean-500 text-white dark:bg-ocean-600 rounded-lg flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-check text-xs"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+            <p id="toast-message" class="text-xs font-semibold truncate dir-ltr text-right">Copied to clipboard!</p>
+        </div>
+    </div>
+
+    <script>
+        const oceaniaData = [
+            { id: 1, country: "Australia", cities: ["Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide", "Canberra", "Gold Coast", "Newcastle", "Hobart", "Darwin", "Cairns", "Wollongong"] },
+            { id: 2, country: "New Zealand", cities: ["Auckland", "Wellington", "Christchurch", "Hamilton", "Tauranga", "Dunedin", "Queenstown", "Rotorua", "Napier", "Palmerston North", "Nelson", "Invercargill"] },
+            { id: 3, country: "Papua New Guinea", cities: ["Port Moresby", "Lae", "Mount Hagen", "Madang", "Goroka", "Kokopo", "Wewak", "Rabaul", "Kundiawa", "Mendi", "Kimbe", "Popondetta"] },
+            { id: 4, country: "Fiji", cities: ["Suva", "Nadi", "Lautoka", "Labasa", "Ba", "Sigatoka", "Savusavu", "Levuka", "Rakiraki", "Tavua", "Nausori", "Koror"] },
+            { id: 5, country: "Solomon Islands", cities: ["Honiara", "Gizo", "Auki", "Munda", "Tulagi", "Kirakira", "Lata", "Taro", "Buala", "Yandina", "Marovo", "Rennell"] },
+            { id: 6, country: "Vanuatu", cities: ["Port Vila", "Luganville", "Isangel", "Lakatoro", "Sola", "Lenakel", "Port-Olry", "Mele", "Tanna", "Espiritu Santo", "Pentecost", "Malekula"] },
+            { id: 7, country: "Samoa", cities: ["Apia", "Vaitele", "Faleula", "Siusega", "Leulumoega", "Safotulafai", "Salelologa", "Lufilufi", "Mulifanua", "Lotofaga", "Manono", "Asau"] },
+            { id: 8, country: "Tonga", cities: ["Nuku’alofa", "Neiafu", "Haveluloto", "Vaini", "Pangai", "‘Ohonua", "Ha’apai", "Kolonga", "Tatakamotonga", "Lapaha", "Mu’a", "Neiafu"] },
+            { id: 9, country: "Kiribati", cities: ["South Tarawa", "Betio", "Bairiki", "Bikenibeu", "Teaoraereke", "Bonriki", "Abarao", "Eita", "Tabiteuea", "Butaritari", "Kiritimati", "London"] },
+            { id: 10, country: "Micronesia", cities: ["Palikir", "Weno", "Kolonia", "Tofol", "Colonia", "Nett", "Madolenihmw", "Lele", "Lelu", "Kosrae", "Pohnpei", "Yap"] },
+            { id: 11, country: "Marshall Islands", cities: ["Majuro", "Ebeye", "Jaluit", "Wotje", "Kwajalein", "Arno", "Maloelap", "Mili", "Likiep", "Ailinglaplap", "Aur", "Namdrik"] },
+            { id: 12, country: "Palau", cities: ["Ngerulmud", "Koror", "Airai", "Meyungs", "Kloulklubed", "Ngaraard", "Ngiwal", "Ngchesar", "Melekeok", "Aimeliik", "Ngatpang", "Babeldaob"] },
+            { id: 13, country: "Nauru", cities: ["Yaren", "Aiwo", "Anabar", "Anetan", "Anibare", "Baiti", "Boe", "Buada", "Denigomodu", "Ewa", "Ijuw", "Meneng"] },
+            { id: 14, country: "Tuvalu", cities: ["Funafuti", "Vaiaku", "Fongafale", "Asau", "Tanrake", "Savave", "Motufoua", "Lofeagai", "Senala", "Teava", "Tepuka", "Niutao"] },
+            { id: 15, country: "New Caledonia", cities: ["Nouméa", "Mont-Dore", "Dumbéa", "Païta", "Bourail", "Koné", "La Foa", "Poindimié", "Lifou", "Maré", "Ouvéa", "Voh"] },
+            { id: 16, country: "French Polynesia", cities: ["Papeete", "Faaa", "Punaauia", "Mahina", "Paea", "Papara", "Arue", "Moorea-Maiao", "Bora Bora", "Huahine", "Raiatea", "Rangiroa"] },
+            { id: 17, country: "Guam", cities: ["Hagåtña", "Dededo", "Yigo", "Tamuning", "Mangilao", "Barrigada", "Santa Rita", "Agat", "Sinajana", "Talofofo", "Inarajan", "Merizo"] },
+            { id: 18, country: "American Samoa", cities: ["Pago Pago", "Tafuna", "Leone", "Utulei", "Fagatogo", "Aua", "Faleniu", "Mapusagafou", "Vaitogi", "Nu’uuli", "Ofu", "Ta’u"] },
+            { id: 19, country: "Cook Islands", cities: ["Avarua", "Arutanga", "Amuri", "Arorangi", "Titikaveka", "Ngatangiia", "Matavera", "Muri", "Mangaia", "Atiu", "Mauke", "Aitutaki"] },
+            { id: 20, country: "Niue", cities: ["Alofi", "Avatele", "Hakupu", "Hikutavake", "Lakepa", "Liku", "Makefu", "Mutalau", "Namukulu", "Tuapa", "Vaiea", "Tamakautoga"] },
+            { id: 21, country: "Tokelau", cities: ["Atafu", "Nukunonu", "Fakaofo"] },
+            { id: 22, country: "Wallis and Futuna", cities: ["Mata-Utu", "Leava", "Alo", "Sigave", "Vaitupu", "Hihifo", "Mala’e", "Aka’aka", "Ha’afuasia", "Kolia", "Tepa", "Vaisei"] }
+        ];
+
+        // State Management
+        let searchQuery = "";
+        let collapsedCountries = new Set();
+
+        // Element Selectors
+        const countriesContainer = document.getElementById('countries-container');
+        const searchInput = document.getElementById('search-input');
+        const clearSearchBtn = document.getElementById('clear-search');
+        const statCountries = document.getElementById('stat-countries');
+        const statCities = document.getElementById('stat-cities');
+        const noResults = document.getElementById('no-results');
+        const darkToggle = document.getElementById('dark-toggle');
+        const darkToggleMobile = document.getElementById('dark-toggle-mobile');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        // Theme Switcher Init
+        function initTheme() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+
+        darkToggle.addEventListener('click', toggleTheme);
+        darkToggleMobile.addEventListener('click', toggleTheme);
+
+        // Toast Notification System
+        let toastTimeout;
+        function showToast(text) {
+            toastMessage.textContent = text;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        // Copy functionality adding 'driving tour'
+        function copyText(name) {
+            const formatted = `${name} driving tour`;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(formatted).then(() => {
+                    showToast(`Copied "${formatted}"`);
+                }).catch(() => fallbackCopy(formatted));
+            } else {
+                fallbackCopy(formatted);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast(`Copied "${text}"`);
+            } catch (err) {
+                showToast('Failed to copy');
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function copyAllCountryCities(countryName) {
+            const item = oceaniaData.find(c => c.country === countryName);
+            if (!item) return;
+            const formattedList = item.cities.map(city => `${city} driving tour`).join('\n');
+            
+            const textArea = document.createElement("textarea");
+            textArea.value = formattedList;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast(`Copied all cities for ${countryName}!`);
+            } catch (err) {
+                showToast('Failed to copy');
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // Open YouTube Direct Driving Tour Search
+        function openYouTubeSearch(query) {
+            const encodedQuery = encodeURIComponent(`${query} driving tour`);
+            window.open(`https://www.youtube.com/results?search_query=${encodedQuery}`, '_blank', 'noopener,noreferrer');
+        }
+
+        function toggleCountryCollapse(countryName) {
+            if (collapsedCountries.has(countryName)) {
+                collapsedCountries.delete(countryName);
+            } else {
+                collapsedCountries.add(countryName);
+            }
+            renderDashboard();
+        }
+
+        document.getElementById('expand-all-btn').addEventListener('click', () => {
+            collapsedCountries.clear();
+            renderDashboard();
+        });
+
+        document.getElementById('collapse-all-btn').addEventListener('click', () => {
+            oceaniaData.forEach(c => collapsedCountries.add(c.country));
+            renderDashboard();
+        });
+
+        function renderDashboard() {
+            let visibleCountriesCount = 0;
+            let visibleCitiesCount = 0;
+            let html = '';
+
+            const isSearching = searchQuery.trim().length > 0;
+            const query = searchQuery.toLowerCase().trim();
+
+            oceaniaData.forEach((item) => {
+                const countryMatches = item.country.toLowerCase().includes(query);
+                const matchingCities = item.cities.filter(city => 
+                    city.toLowerCase().includes(query) || countryMatches
+                );
+
+                if (matchingCities.length === 0) return;
+
+                visibleCountriesCount++;
+                visibleCitiesCount += matchingCities.length;
+
+                const isCollapsed = !isSearching && collapsedCountries.has(item.country);
+                const escapedCountry = item.country.replace(/'/g, "\\'");
+
+                html += `
+                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+                        
+                        <!-- Country Card Header -->
+                        <div class="p-4 sm:p-5 bg-slate-50/80 dark:bg-slate-900/60 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            
+                            <div class="flex items-center space-x-3 space-x-reverse cursor-pointer select-none" onclick="toggleCountryCollapse('${escapedCountry}')">
+                                <button aria-label="Toggle collapse" class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-sm transition-transform duration-200 ${isCollapsed ? '' : 'rotate-90'}">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </button>
+                                <span class="flex items-center justify-center w-8 h-8 rounded-xl bg-ocean-100 dark:bg-ocean-950/80 text-ocean-700 dark:text-ocean-300 font-extrabold text-xs">
+                                    ${item.id}
+                                </span>
+                                <div class="flex items-center space-x-2.5 space-x-reverse">
+                                    <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100 en-font">${item.country}</h2>
+                                    <span class="px-2.5 py-0.5 text-xs font-semibold bg-ocean-50 dark:bg-ocean-950/50 text-ocean-600 dark:text-ocean-400 border border-ocean-200/50 dark:border-ocean-800/50 rounded-full">
+                                        ${matchingCities.length} ${matchingCities.length === 1 ? 'مدينة' : 'مدن'}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Actions for Country Header -->
+                            <div class="flex items-center gap-2">
+                                <button onclick="copyText('${escapedCountry}')" 
+                                    class="flex-1 sm:flex-initial px-3.5 py-2 text-xs font-semibold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-750 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-xs">
+                                    <i class="fa-regular fa-copy text-slate-400"></i> نسخ الدولة
+                                </button>
+                                <button onclick="copyAllCountryCities('${escapedCountry}')" 
+                                    class="flex-1 sm:flex-initial px-3.5 py-2 text-xs font-semibold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-750 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-xs">
+                                    <i class="fa-solid fa-list-check text-slate-400"></i> نسخ جميع المدن
+                                </button>
+                                <button onclick="openYouTubeSearch('${escapedCountry}')" 
+                                    class="flex-1 sm:flex-initial px-3.5 py-2 text-xs font-semibold bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900/50 hover:bg-red-100 dark:hover:bg-red-900/60 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-xs">
+                                    <i class="fa-brands fa-youtube text-red-500"></i> جولة
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cities Grid -->
+                        <div class="${isCollapsed ? 'hidden' : 'block'} p-4 sm:p-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                                ${matchingCities.map(city => {
+                                    const escapedCity = city.replace(/'/g, "\\'");
+                                    return `
+                                        <div class="group relative flex items-center justify-between p-3 rounded-xl bg-slate-50/80 dark:bg-slate-950/40 hover:bg-ocean-50/50 dark:hover:bg-slate-800/60 border border-slate-200/60 dark:border-slate-800 transition-all duration-150">
+                                            
+                                            <!-- City Clickable Target -->
+                                            <button onclick="copyText('${escapedCity}')" 
+                                                title="إضغط لنسخ '${city} driving tour'" 
+                                                class="flex-1 text-right font-medium text-xs sm:text-sm text-slate-700 dark:text-slate-200 hover:text-ocean-600 dark:hover:text-ocean-400 truncate ml-2 flex items-center gap-1.5 en-font">
+                                                <i class="fa-solid fa-location-dot text-slate-300 dark:text-slate-600 text-xs shrink-0"></i>
+                                                <span class="truncate dir-ltr text-right">${city}</span>
+                                            </button>
+
+                                            <!-- City Action Buttons -->
+                                            <div class="flex items-center space-x-1 space-x-reverse shrink-0">
+                                                <button onclick="copyText('${escapedCity}')" 
+                                                    title="نسخ '${city} driving tour'"
+                                                    class="p-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-100 hover:bg-white dark:hover:bg-slate-800 rounded-lg transition-colors text-xs">
+                                                    <i class="fa-regular fa-copy"></i>
+                                                </button>
+                                                <button onclick="openYouTubeSearch('${escapedCity}')" 
+                                                    title="بحث '${city} driving tour' في يوتيوب"
+                                                    class="p-1.5 text-red-500 hover:text-red-600 dark:text-red-400 hover:bg-white dark:hover:bg-slate-800 rounded-lg transition-colors text-xs">
+                                                    <i class="fa-brands fa-youtube"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            countriesContainer.innerHTML = html;
+
+            // Update Header Stats Count
+            statCountries.textContent = visibleCountriesCount;
+            statCities.textContent = visibleCitiesCount;
+
+            if (visibleCountriesCount === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        // Live Search Input Event Handlers
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            if (searchQuery.trim().length > 0) {
+                clearSearchBtn.classList.remove('hidden');
+            } else {
+                clearSearchBtn.classList.add('hidden');
+            }
+            renderDashboard();
+        });
+
+        clearSearchBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            searchQuery = '';
+            clearSearchBtn.classList.add('hidden');
+            renderDashboard();
+        });
+
+        // App Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            renderDashboard();
+        });
+    </script>
+</body>
+</html>
